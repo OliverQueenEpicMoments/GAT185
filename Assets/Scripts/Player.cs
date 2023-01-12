@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour {
     [Range(1, 10), Tooltip("Controls the speed of the player")] public float Speed = 5;
-    public float RotationRate = 135;
+    [Range(1, 10)] public float RotationRate = 135;
     public GameObject Prefab;
     public Transform BulletSpawnLocation;
 
@@ -26,6 +26,7 @@ public class Player : MonoBehaviour {
 
         Quaternion Rotate = Quaternion.Euler(Rotation * RotationRate * Time.deltaTime);
         transform.rotation = transform.rotation * Rotate;
+
         transform.Translate(Direction * Speed * Time.deltaTime);
         //transform.position += Direction * Speed * Time.deltaTime;
 
