@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5938821532629177637}
   - component: {fileID: 4258485210895111053}
   m_Layer: 0
-  m_Name: Asteroid Small
+  m_Name: Asteroid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 1875134094539988}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0, y: 0, z: 0}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
+  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -110,6 +110,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89021d726eb658e449ea47b14f0abe69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 45
-  RotationRate: 40
+  Speed: 20
+  RotationRate: 20
   Explosion: {fileID: 8338846212705235754, guid: f76b9b0b3123e774bb5c9feb952d5996, type: 3}
