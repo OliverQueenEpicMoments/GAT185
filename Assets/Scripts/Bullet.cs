@@ -12,4 +12,12 @@ public class Bullet : MonoBehaviour {
     void Update() {
         transform.Translate(Vector3.forward * Speed * Time.deltaTime);
     }
+
+    private void OnTriggerEnter(Collider other) {
+        if (other.gameObject.CompareTag("Player")) return;
+
+        Destroy(other.gameObject);
+        Destroy(gameObject);
+        Debug.Log(other.gameObject);
+    }
 }

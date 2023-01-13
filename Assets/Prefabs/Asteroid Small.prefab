@@ -9,7 +9,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1379459666093482, guid: 28548987d12c89f4bb36b9bef96ceebe, type: 3}
       propertyPath: m_Name
-      value: Asteroid Variant
+      value: Asteroid Small
       objectReference: {fileID: 0}
     - target: {fileID: 4404864704542510, guid: 28548987d12c89f4bb36b9bef96ceebe, type: 3}
       propertyPath: m_RootOrder
@@ -17,15 +17,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4404864704542510, guid: 28548987d12c89f4bb36b9bef96ceebe, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.125
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 4404864704542510, guid: 28548987d12c89f4bb36b9bef96ceebe, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.125
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 4404864704542510, guid: 28548987d12c89f4bb36b9bef96ceebe, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.125
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 4404864704542510, guid: 28548987d12c89f4bb36b9bef96ceebe, type: 3}
       propertyPath: m_LocalPosition.x
@@ -196,6 +196,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89021d726eb658e449ea47b14f0abe69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 20
-  RotationRate: 20
+  Speed: 45
+  RotationRate: 40
   Explosion: {fileID: 8338846212705235754, guid: f76b9b0b3123e774bb5c9feb952d5996, type: 3}
