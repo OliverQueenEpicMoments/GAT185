@@ -11,6 +11,8 @@ public class Asteroid : MonoBehaviour {
     Vector3 Rotation;
 
     private void OnDestroy() {
+        var GameManager = FindObjectOfType<AsteroidGameManager>();
+        GameManager?.AddPoints(100);
         Instantiate(Explosion, transform.position, transform.rotation);
     }
 
