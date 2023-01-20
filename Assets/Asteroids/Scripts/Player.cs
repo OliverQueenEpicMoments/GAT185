@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour {
-    [Range(1, 10), Tooltip("Controls the speed of the player")] public float Speed = 5;
-    [Range(1, 10)] public float RotationRate = 135;
+    [Range(1, 100), Tooltip("Controls the speed of the player")] public float Speed = 5;
+    [Range(1, 100)] public float RotationRate = 135;
     public GameObject Prefab;
     public Transform BulletSpawnLocation;
 
@@ -28,12 +28,17 @@ public class Player : MonoBehaviour {
         transform.rotation = transform.rotation * Rotate;
 
         transform.Translate(Direction * Speed * Time.deltaTime);
-        //transform.position += Direction * Speed * Time.deltaTime;
 
         if (Input.GetButton("Fire1")) {
             //Debug.Log("Pew");
             //GetComponent<AudioSource>().Play();
             GameObject Bullet = Instantiate(Prefab, BulletSpawnLocation.position, BulletSpawnLocation.rotation);
+        }
+    }
+
+    private void OnTriggerEnter(Collider other) {
+        if (other.gameObject.CompareTag("Enemy")) {
+            FindObjectOfType<AsteroidGameManager>()?.SetGameOver();
         }
     }
 }

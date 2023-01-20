@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class RollerPlayer : MonoBehaviour {
+    [SerializeField] private Transform View;
     [SerializeField] private float MaxForce = 5;
 
+    private int Score;
     private Vector3 Force;
     private Rigidbody RB;
 
@@ -18,11 +20,17 @@ public class RollerPlayer : MonoBehaviour {
         Direction.x = Input.GetAxis("Horizontal");
         Direction.z = Input.GetAxis("Vertical");
 
-        Force = Direction * 10;
+        Quaternion ViewSpace = Quaternion.AngleAxis(View.rotation.eulerAngles.y, Vector3.up);
+        Force = ViewSpace * (Direction * MaxForce);
 
         if (Input.GetButtonDown("Jump")) { 
             RB.AddForce(Vector3.up * 10, ForceMode.Impulse);
         }
+    }
+
+    public void AddPoints(int Points) {
+        Score += Points;
+        Debug.Log(Score);
     }
 
 	private void FixedUpdate() {

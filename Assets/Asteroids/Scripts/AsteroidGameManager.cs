@@ -6,6 +6,7 @@ using TMPro;
 public class AsteroidGameManager : MonoBehaviour {
 	[SerializeField] private TMP_Text ScoreUI;
 	[SerializeField] private GameObject GameOverUI;
+
 	int Score = 0;
 
 	public void AddPoints(int Points) {
@@ -13,7 +14,7 @@ public class AsteroidGameManager : MonoBehaviour {
 		ScoreUI.text = Score.ToString();
 	}
 
-	public void OnConnectedToServer() {
+	public void SetGameOver() {
 		GameOverUI.SetActive(true);
 	}
 }
