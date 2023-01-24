@@ -22,4 +22,8 @@ public class RollerCamera : MonoBehaviour {
         transform.position = Target.position + Offset;
         transform.rotation = Quaternion.LookRotation(-Offset);
     }
+
+    public void SetTarget(Transform Target) { 
+        this.Target = Target;
+    }
 }

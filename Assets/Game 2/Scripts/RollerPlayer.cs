@@ -12,6 +12,8 @@ public class RollerPlayer : MonoBehaviour {
 
     void Start() {
         RB = GetComponent<Rigidbody>();
+        View = Camera.main.transform;
+        Camera.main.GetComponent<RollerCamera>().SetTarget(transform);
     }
 
     void Update() {
@@ -26,14 +28,16 @@ public class RollerPlayer : MonoBehaviour {
         if (Input.GetButtonDown("Jump")) { 
             RB.AddForce(Vector3.up * 10, ForceMode.Impulse);
         }
-    }
 
-    public void AddPoints(int Points) {
-        Score += Points;
-        Debug.Log(Score);
+        RollerGameManager.Instance.SetHealth(50);
     }
 
 	private void FixedUpdate() {
 		RB.AddForce(Force);
 	}
+
+    public void AddPoints(int Points) {
+        Score += Points;
+        RollerGameManager.Instance.SetScore(Score);
+    }
 }
