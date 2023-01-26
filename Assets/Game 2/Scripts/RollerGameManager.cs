@@ -8,6 +8,7 @@ using UnityEngine.SocialPlatforms.Impl;
 public class RollerGameManager : Singleton<RollerGameManager> {
 	[SerializeField] Slider HealthMeter;
 	[SerializeField] TMP_Text ScoreUI;
+	[SerializeField] GameObject GameOverUI;
 
 	[SerializeField] GameObject PlayerPrefab;
 	[SerializeField] Transform PlayerStart;
@@ -22,5 +23,9 @@ public class RollerGameManager : Singleton<RollerGameManager> {
 
 	public void SetScore(int Score) {
 		ScoreUI.text = Score.ToString();
+	}
+
+	public void SetGameOver() {
+		GameOverUI.SetActive(true);
 	}
 }
