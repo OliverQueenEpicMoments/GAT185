@@ -65,7 +65,7 @@ public class RollerPlayer : MonoBehaviour {
     }
 
     public void OnDeath() {
-        RollerGameManager.Instance.SetGameOver();
+        RollerGameManager.Instance.SetPlayerDead();
         Destroy(gameObject);
     }
 }
