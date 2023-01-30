@@ -2,26 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CircleRadiusSpawner : MonoBehaviour {
-    [Range(1, 10)] public float MinTime = 3;
-    [Range(1, 10)] public float MaxTime = 5;
-    [Range(1, 1000)] public float Radius = 100;
-    public Transform SpawnLocation = null;
-    public GameObject[] Prefabs;
+public class CircleRadiusSpawner : Spawner2 {
+    [SerializeField] [Range(1, 1000)] private float Radius = 100;
+    [SerializeField] private Transform SpawnLocation = null;
+    [SerializeField] private GameObject[] Prefabs;
 
-    float SpawnTimer = 0;
+    public override void Spawn() {
+        // Set spawn position around spawn location transform (player) at circle radius (distance) 
+        Vector3 Position = SpawnLocation.position + Quaternion.AngleAxis(Random.value * 360.0f, Vector3.up) * (Vector3.forward * Radius);
 
-    void Start() {
-        SpawnTimer = Random.Range(MinTime, MaxTime);
+        // Create spawn object from random spawn prefab, spawner is parent object
+        Instantiate(Prefabs[Random.Range(0, Prefabs.Length)], Position, Quaternion.identity, transform);
     }
 
-    void Update() {
-        SpawnTimer -= Time.deltaTime;
-        if (SpawnTimer <= 0) {
-            SpawnTimer = Random.Range(MinTime, MaxTime);
+    public override void Clear() {
+        // Get all children game objects of spawner
+        var Spawned = GetComponentsInChildren<Transform>();
 
-            Vector3 position = SpawnLocation.position + Quaternion.AngleAxis(Random.value * 360.0f, Vector3.up) * (Vector3.forward * Radius);
-            Instantiate(Prefabs[Random.Range(0, Prefabs.Length)], position, Quaternion.identity);
+        // Iterate through all spawned transforms
+        foreach (var Spawn in Spawned) {
+            // Destroy child game object
+            Destroy(Spawn.gameObject);
         }
     }
 }
