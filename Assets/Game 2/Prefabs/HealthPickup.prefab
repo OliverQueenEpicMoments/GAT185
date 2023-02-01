@@ -73,9 +73,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbba842853bd5f046b5405d4585bfe2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactFX: {fileID: 0}
+  interactFX: {fileID: 1800712629389540, guid: ad1aa46afd04a6942bb772aa5c443642, type: 3}
   destroyOnInteract: 1
-  Heal: 50
+  Heal: 25
 --- !u!1001 &5124139871729958630
 PrefabInstance:
   m_ObjectHideFlags: 0

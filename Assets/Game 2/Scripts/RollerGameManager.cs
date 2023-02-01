@@ -16,6 +16,7 @@ public class RollerGameManager : Singleton<RollerGameManager> {
 	[SerializeField] TMP_Text LivesUI;
 	[SerializeField] GameObject GameOverUI;
 	[SerializeField] GameObject TitleUI;
+	[SerializeField] GameObject GameWinUI;
 
 	[SerializeField] AudioSource GameMusic;
 
@@ -30,6 +31,7 @@ public class RollerGameManager : Singleton<RollerGameManager> {
 		START_LEVEL,
 		PLAY_GAME,
 		PLAYER_DEAD,
+		GAME_WIN,
 		GAME_OVER
 	}
 
@@ -68,7 +70,15 @@ public class RollerGameManager : Singleton<RollerGameManager> {
 				if (StateTimer <= 0) {
 					state = State.START_LEVEL;
 				}
-                    break;
+                break;
+			case State.GAME_WIN:
+                GameWinUI.SetActive(true);
+                StateTimer -= Time.deltaTime;
+                if (StateTimer <= 0) {
+                    GameWinUI.SetActive(false);
+                    state = State.TITLE;
+                }
+                break;
 			case State.GAME_OVER:
 				GameOverUI.SetActive(true);
 				StateTimer -= Time.deltaTime;
@@ -114,7 +124,12 @@ public class RollerGameManager : Singleton<RollerGameManager> {
 
 	public void SetGameWin() {
 		Debug.Log("Congratulations You Won!");
-	}
+        StopGameEvent.Notify();
+        GameMusic.Stop();
+        GameWinUI.SetActive(true);
+        state = State.GAME_WIN;
+        StateTimer = 3;
+    }
 
 	public void OnStartGame() { 
 		state = State.START_GAME;
