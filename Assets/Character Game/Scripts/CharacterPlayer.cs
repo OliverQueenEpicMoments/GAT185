@@ -1,18 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(CharacterController))]
 public class CharacterPlayer : MonoBehaviour {
-    [SerializeField] private float Speed = 5;
-    [SerializeField] private float HitForce = 2;
-    [SerializeField] private float Gravity = Physics.gravity.y;
-    [SerializeField] private float TurnRate = 10;
-    [SerializeField] private float JumpHeight = 2;
+	[SerializeField] private PlayerData playerdata;
 	[SerializeField] private Animator animator;
+	[SerializeField] private InputRouter inputrouter;
+	//[SerializeField] private ItemManager itemmanager;
 
     CharacterController charactercontroller;
+	Vector2 InputAxis;
+
 	PlayerInputActions PlayerInput;
 	Camera MainCamera;
 	Vector3 Velocity = Vector3.zero;
@@ -33,37 +34,36 @@ public class CharacterPlayer : MonoBehaviour {
 	void Start() {
         charactercontroller = GetComponent<CharacterController>();
 		MainCamera = Camera.main;
-    }
+
+		inputrouter.JumpEvent += OnJump;
+		inputrouter.MoveEvent += OnMove;
+		inputrouter.FireEvent += OnFire;
+		inputrouter.FireStopEvent += OnFireStop;
+	}
 
     void Update() {
         Vector3 Direction = Vector3.zero;
-		Vector2 Axis = PlayerInput.Player.Move.ReadValue<Vector2>();
 
-        Direction.x = Axis.x;
-        Direction.z = Axis.y;
+        Direction.x = InputAxis.x;
+        Direction.z = InputAxis.y;
 
 		Direction = MainCamera.transform.TransformDirection(Direction);
 
 		if (charactercontroller.isGrounded)	{
-			Velocity.x = Direction.x * Speed;
-			Velocity.z = Direction.z * Speed;
+			Velocity.x = Direction.x * playerdata.Speed;
+			Velocity.z = Direction.z * playerdata.Speed;
 			InAirTime = 0;
-			if (PlayerInput.Player.Jump.triggered) {
-				animator.SetTrigger("Jump");
-				Velocity.y = Mathf.Sqrt(JumpHeight * -3 * Gravity);
-				Velocity.x = Direction.x * (Speed * 0.75f);
-				Velocity.z = Direction.z * (Speed * 0.75f);
-			}
+
 		} else {
 			InAirTime += Time.deltaTime;
-			Velocity.y += Gravity * Time.deltaTime;
+			Velocity.y += playerdata.Gravity * Time.deltaTime;
 		}
 
 		charactercontroller.Move(Velocity * Time.deltaTime);
 		Vector3 Look = Direction;
 		Look.y = 0;
 		if (Look.magnitude > 0) {
-			transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(Look), TurnRate * Time.deltaTime);
+			transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(Look), playerdata.TurnRate * Time.deltaTime);
 		}
 		
 		// Set animator parameters
@@ -94,14 +94,30 @@ public class CharacterPlayer : MonoBehaviour {
 		// then you can also multiply the push velocity by that.
 
 		// Apply the push
-		Body.velocity = PushDir * HitForce;
+		Body.velocity = PushDir * playerdata.HitForce;
 	}
 
-	public void OnJump(InputAction.CallbackContext context) {
-		if (context.performed) Debug.Log("Jump");
+	public void OnJump() {
+		if (charactercontroller.isGrounded) {
+			animator.SetTrigger("Jump");
+			Velocity.y = Mathf.Sqrt(playerdata.JumpHeight * -3 * playerdata.Gravity);
+		}
 	}
 
-	public void OnLeftFootSpawn(GameObject go) {
+	public void OnFire() {
+
+	}
+
+	public void OnFireStop() {
+
+	}
+
+
+	public void OnMove(Vector2 axis) {
+		InputAxis = axis;
+	}
+
+	public void OnLeftFootSpawn(GameObject go) { 
 		Transform Bone = animator.GetBoneTransform(HumanBodyBones.LeftFoot);
 		Instantiate(go, Bone.position, Bone.rotation);
 	}
