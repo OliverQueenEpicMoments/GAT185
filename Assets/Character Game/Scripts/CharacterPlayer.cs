@@ -9,6 +9,7 @@ public class CharacterPlayer : MonoBehaviour {
 	[SerializeField] private PlayerData playerdata;
 	[SerializeField] private Animator animator;
 	[SerializeField] private InputRouter inputrouter;
+	[SerializeField] private Weapon weapon;
 	//[SerializeField] private ItemManager itemmanager;
 
     CharacterController charactercontroller;
@@ -105,16 +106,20 @@ public class CharacterPlayer : MonoBehaviour {
 	}
 
 	public void OnFire() {
-
+		weapon.Use();
 	}
 
 	public void OnFireStop() {
-
+		weapon.StopUse();
 	}
 
 
 	public void OnMove(Vector2 axis) {
 		InputAxis = axis;
+	}
+
+	public void OnAnimEventItemUse() { 
+		weapon.OnAnimEventItemUse();
 	}
 
 	public void OnLeftFootSpawn(GameObject go) { 
