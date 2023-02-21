@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ammoType: 1
   lifetime: 0.1
-  damage: 20
+  damage: 100
   destroyOnImpact: 0
-  impactPrefab: {fileID: 100002, guid: e05640b713279be4ea35ced053857820, type: 3}
+  impactPrefab: {fileID: 602442525719755316, guid: 97c05b05ea6459940ac3e75d8d5fe4dd, type: 3}
   force: 0
   forceMode: 0
   damageOverTime: 0

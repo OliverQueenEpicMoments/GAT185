@@ -9,12 +9,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5803661717258715363}
+  - component: {fileID: -5202518780270336517}
   - component: {fileID: 6283781802203342659}
-  - component: {fileID: 8879071018503738263}
   - component: {fileID: 7376943836460116489}
   - component: {fileID: 1827576304681844816}
   - component: {fileID: 6703866282841015239}
   - component: {fileID: 7314401170116353276}
+  - component: {fileID: 6930852360993931897}
   m_Layer: 0
   m_Name: SwordAmmo
   m_TagString: Untagged
@@ -37,6 +38,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-5202518780270336517
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 19846636865828643}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6049d9ad046b45c48b9bfd797a4ac13c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ammoData: {fileID: 11400000, guid: b144aceb2e897a147860eae063cb9d36, type: 2}
 --- !u!114 &6283781802203342659
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -49,20 +63,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e21f03f75a4e1ee44a4bc6f67480be47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HitTagName: 
---- !u!114 &8879071018503738263
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 19846636865828643}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9517ca5b37814624aa8784584291137b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ammoData: {fileID: 11400000, guid: b144aceb2e897a147860eae063cb9d36, type: 2}
+  HitTagName: Enemy
 --- !u!114 &7376943836460116489
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -91,7 +92,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 19846636865828643}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -139,3 +140,19 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &6930852360993931897
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 19846636865828643}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
