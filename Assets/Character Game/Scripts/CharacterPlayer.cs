@@ -9,8 +9,7 @@ public class CharacterPlayer : MonoBehaviour {
 	[SerializeField] private PlayerData playerdata;
 	[SerializeField] private Animator animator;
 	[SerializeField] private InputRouter inputrouter;
-	[SerializeField] private Weapon weapon;
-	//[SerializeField] private ItemManager itemmanager;
+	[SerializeField] private Inventory inventory;
 
     CharacterController charactercontroller;
 	Vector2 InputAxis;
@@ -20,18 +19,6 @@ public class CharacterPlayer : MonoBehaviour {
 	Vector3 Velocity = Vector3.zero;
     float InAirTime = 0;
 
-	private void OnEnable() {
-		PlayerInput.Enable();
-	}
-
-	private void OnDisable() {
-		PlayerInput.Disable();
-	}
-
-	private void Awake() {
-		PlayerInput = new PlayerInputActions();
-	}
-
 	void Start() {
         charactercontroller = GetComponent<CharacterController>();
 		MainCamera = Camera.main;
@@ -40,6 +27,7 @@ public class CharacterPlayer : MonoBehaviour {
 		inputrouter.MoveEvent += OnMove;
 		inputrouter.FireEvent += OnFire;
 		inputrouter.FireStopEvent += OnFireStop;
+		inputrouter.NextItemEvent += OnNextItem;
 	}
 
     void Update() {
@@ -74,6 +62,18 @@ public class CharacterPlayer : MonoBehaviour {
 		animator.SetBool("IsGrounded", charactercontroller.isGrounded);
     }
 
+	private void OnEnable() {
+		PlayerInput.Enable();
+	}
+
+	private void OnDisable() {
+		PlayerInput.Disable();
+	}
+
+	private void Awake() {
+		PlayerInput = new PlayerInputActions();
+	}
+
 	void OnControllerColliderHit(ControllerColliderHit hit) {
 		Rigidbody Body = hit.collider.attachedRigidbody;
 
@@ -106,20 +106,23 @@ public class CharacterPlayer : MonoBehaviour {
 	}
 
 	public void OnFire() {
-		weapon.Use();
+		inventory.Use();
 	}
 
 	public void OnFireStop() {
-		weapon.StopUse();
+		inventory.StopUse();
 	}
 
+	public void OnNextItem() { 
+		inventory.EquipNextItem();
+	}
 
 	public void OnMove(Vector2 axis) {
 		InputAxis = axis;
 	}
 
 	public void OnAnimEventItemUse() { 
-		weapon.OnAnimEventItemUse();
+		inventory.OnAnimEventItemUse();
 	}
 
 	public void OnLeftFootSpawn(GameObject go) { 

@@ -19,10 +19,12 @@ public class Weapon : Item {
 	public override void Equip() {
 		base.Equip();
 		weaponReady = true;
+		if (weaponData.animEquipName != "") animator.SetBool(weaponData.animEquipName, true);
 	}
 
 	public override void Unequip() {
 		base.Unequip();
+		if (weaponData.animEquipName != "") animator.SetBool(weaponData.animEquipName, false);
 	}
 
 	public override void Use() {

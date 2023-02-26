@@ -10,6 +10,7 @@ public class InputRouter : ScriptableObject, PlayerInputActions.IPlayerActions {
 	public UnityAction FireStopEvent;
 	public UnityAction JumpEvent;
 	public UnityAction JumpStopEvent;
+	public UnityAction NextItemEvent;
 	public UnityAction<Vector2> MoveEvent;
 
 	private PlayerInputActions InputActions;
@@ -56,4 +57,10 @@ public class InputRouter : ScriptableObject, PlayerInputActions.IPlayerActions {
 				break;
 		}
 	}
+
+    public void OnNextItem(InputAction.CallbackContext context) {
+        if (context.phase == InputActionPhase.Performed) {
+			NextItemEvent?.Invoke();
+		}
+    }
 }

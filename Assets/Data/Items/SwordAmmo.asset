@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29fb85629a0c3e64f9bbf5f43bf062db, type: 3}
+  m_Name: SwordAmmo
+  m_EditorClassIdentifier: 
+  ammoType: 1
+  lifetime: 0.1
+  damage: 100
+  destroyOnImpact: 0
+  impactPrefab: {fileID: 602442525719755316, guid: 97c05b05ea6459940ac3e75d8d5fe4dd, type: 3}
+  force: 0
+  forceMode: 0
+  damageOverTime: 0
+  bounce: 0
+  rotateToVelocity: 0
+  impactOnExpired: 0
+  distance: 0
+  hitMask:
+    serializedVersion: 2
+    m_Bits: 0
