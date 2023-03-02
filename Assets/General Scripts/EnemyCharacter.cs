@@ -7,13 +7,15 @@ using UnityEngine.AI;
 public class EnemyCharacter : MonoBehaviour {
     [SerializeField] Animator animator;
     [SerializeField] Sensor sensor;
+    [SerializeField] Transform AttackTransform;
+    [SerializeField] float damage;
 
     private Camera MainCamera;
     private NavMeshAgent navmeshagent;
     private Transform Target;
 
     private State state = State.IDLE;
-    float Timer = 0;
+    private float Timer = 0;
 
     enum State {
         IDLE,
@@ -88,4 +90,16 @@ public class EnemyCharacter : MonoBehaviour {
         yield return new WaitForSeconds(4.0f);
         state = State.CHASE;
     }
+
+	void OnAnimAttack() {
+		var Colliders = Physics.OverlapSphere(AttackTransform.position, 2);
+		foreach (var Collider in Colliders)	{
+			if (Collider.gameObject.CompareTag("Player")) {
+				if (Collider.gameObject.TryGetComponent<Health>(out Health health)) {
+					health.OnApplyDamage(damage);
+                    break;
+				}
+			}
+		}
+	}
 }

@@ -63,6 +63,10 @@ public class Inventory : MonoBehaviour {
 		inventoryData.AddItem(itemData);
 	}
 
+	public bool Contains(ItemData itemdata) { 
+		return inventoryData.Contains(itemdata);
+	}
+
 	private Item GetItemFromItemData(ItemData itemData) {
 		// find item in items with matching item data
 		return items.FirstOrDefault(item => item.GetData() == itemData);

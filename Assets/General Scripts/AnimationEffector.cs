@@ -13,6 +13,8 @@ public class AnimationEffector : Interactable {
 	}
 
 	public override void OnInteract(GameObject target) {
+		if (condition != null && !condition.IsTrue(target)) return;
+
 		animator.SetTrigger(Parameter);
 
 		if (interactFX != null) Instantiate(interactFX, transform.position, Quaternion.identity);

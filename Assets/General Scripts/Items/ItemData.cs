@@ -34,6 +34,8 @@ public class ItemData : ScriptableObject {
 	
 	public string animTriggerName;
 	public string animEquipName;
+
+	public float[] RigLayerWeight;
 	
 	public GameObject itemPrefab;
 	public GameObject pickupPrefab;

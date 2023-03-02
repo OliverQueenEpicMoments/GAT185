@@ -57,6 +57,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 288380949531703265}
   sensor: {fileID: 5746215601202932825}
+  AttackTransform: {fileID: 789937234698232368}
+  damage: 30
 --- !u!114 &288380949531703278
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -316,5 +318,10 @@ PrefabInstance:
 --- !u!4 &255070820670905152 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 0cbcb374de804654393c47445fefa9ab, type: 3}
+  m_PrefabInstance: {fileID: 288380949720562859}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &789937234698232368 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8145072973764649317, guid: 0cbcb374de804654393c47445fefa9ab, type: 3}
   m_PrefabInstance: {fileID: 288380949720562859}
   m_PrefabAsset: {fileID: 0}
