@@ -5,13 +5,12 @@ using UnityEngine;
 
 public class Health : MonoBehaviour {
     [SerializeField] float MaxHealth = 100;
-    public float health { get; set; }
+    public float health; // { get; set; }
     private bool IsDead { get; set; }
 
     public Action OnDamage;
     public Action OnHeal;
     public Action OnDeath;
-
 
     private void Awake() {
         health = MaxHealth;

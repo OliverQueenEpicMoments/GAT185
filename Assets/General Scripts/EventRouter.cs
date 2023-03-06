@@ -5,7 +5,7 @@ using UnityEngine.Events;
 
 [CreateAssetMenu(menuName = "Events/EventRouter")]
 public class EventRouter : ScriptableObject {
-    //?Allow?observers?to?subscribe?to?event?(?onEvent?+=? )
+    // Allow observers to subscribe to event (OnEvent += )
     public UnityAction OnEvent;
 
     public void Notify() { 

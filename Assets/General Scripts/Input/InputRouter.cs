@@ -12,6 +12,7 @@ public class InputRouter : ScriptableObject, PlayerInputActions.IPlayerActions {
 	public UnityAction JumpStopEvent;
 	public UnityAction NextItemEvent;
 	public UnityAction<Vector2> MoveEvent;
+	public UnityAction<Vector2> LookEvent;
 
 	private PlayerInputActions InputActions;
 
@@ -32,7 +33,7 @@ public class InputRouter : ScriptableObject, PlayerInputActions.IPlayerActions {
 	}
 
 	public void OnLook(InputAction.CallbackContext context) {
-		
+		LookEvent?.Invoke(context.ReadValue<Vector2>());
 	}
 
 	public void OnFire(InputAction.CallbackContext context) {

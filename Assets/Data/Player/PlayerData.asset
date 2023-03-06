@@ -15,5 +15,5 @@ MonoBehaviour:
   Speed: 5
   HitForce: 2
   Gravity: -9.81
-  TurnRate: 10
+  TurnRate: 180
   JumpHeight: 2

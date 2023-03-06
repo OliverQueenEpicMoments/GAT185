@@ -6,6 +6,12 @@ using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(CharacterController))]
 public class CharacterPlayer : MonoBehaviour {
+	public enum Mode {
+		THIRD_PERSON,
+		FREE
+	}
+
+	[SerializeField] private Mode mode = Mode.THIRD_PERSON;
 	[SerializeField] private PlayerData playerdata;
 	[SerializeField] private Animator animator;
 	[SerializeField] private InputRouter inputrouter;
@@ -34,11 +40,27 @@ public class CharacterPlayer : MonoBehaviour {
 
     void Update() {
         Vector3 Direction = Vector3.zero;
-
         Direction.x = InputAxis.x;
         Direction.z = InputAxis.y;
 
-		Direction = MainCamera.transform.TransformDirection(Direction);
+		switch (mode) {
+			case Mode.THIRD_PERSON:
+				// Convert direction to character space
+				Direction = transform.rotation * Direction;
+				break;
+			case Mode.FREE:
+				// Convert direction to camera space
+				// Convert the camera yaw to a quaternion (rotation)
+				Quaternion Q = Quaternion.AngleAxis(MainCamera.transform.eulerAngles.y, Vector3.up);
+
+				// Set the direction to be in camera space
+				Direction = Q * Direction;
+                break;
+			default:
+				break;
+		}
+
+		//Direction = MainCamera.transform.TransformDirection(Direction);
 
 		if (charactercontroller.isGrounded)	{
 			Velocity.x = Direction.x * playerdata.Speed;
@@ -51,14 +73,31 @@ public class CharacterPlayer : MonoBehaviour {
 		}
 
 		charactercontroller.Move(Velocity * Time.deltaTime);
+
+		// Rotation
 		Vector3 Look = Direction;
-		Look.y = 0;
+
+        // If the player is moving (look vector length is greater than 0 ) update the rotation
+        Look.y = 0;
 		if (Look.magnitude > 0) {
-			transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(Look), playerdata.TurnRate * Time.deltaTime);
+			switch (mode) {
+				case Mode.THIRD_PERSON:
+					// Rotate with input axis X (horizontal)
+					transform.rotation *= Quaternion.AngleAxis(InputAxis.x * playerdata.TurnRate * Time.deltaTime, Vector3.up);
+					break;
+				case Mode.FREE:
+                    // Rotate towards look at direction
+                    transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(Look), playerdata.TurnRate * Time.deltaTime);
+                    break;
+				default:
+					break;
+			}
 		}
-		
+
 		// Set animator parameters
-		animator.SetFloat("Speed", charactercontroller.velocity.magnitude);
+		Vector3 V = Velocity;
+		V.y = 0;
+		animator.SetFloat("Speed", V.magnitude);
 		animator.SetFloat("VelocityY", charactercontroller.velocity.y);
 		animator.SetFloat("InAirTime", InAirTime);
 		animator.SetBool("IsGrounded", charactercontroller.isGrounded);
